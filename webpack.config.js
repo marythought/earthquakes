@@ -36,7 +36,7 @@ const common = merge(
     }
   },
   parts.indexTemplate({
-    title: 'Code 501 React Boilerplate',
+    title: 'Earthquakes!',
     appMountId: 'app'
   }),
   parts.loadJSX(PATHS.app),

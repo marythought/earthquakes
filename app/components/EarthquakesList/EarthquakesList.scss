@@ -1,9 +1,9 @@
-.MessagesList {
+.EarthquakesList {
   ul {
     list-style-type: none;
     max-width: 600px;
-    .MessageBox {
-      .message-header {
+    .EarthquakeBox {
+      .earthquake-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -12,7 +12,7 @@
           max-width: 140px;
         }
       }
-      .message-body {
+      .earthquake-body {
         font-family: serif;
       }
     }
