@@ -10,7 +10,7 @@ const EarthquakeBox = ({ properties, geometry }) =>
       {/* <button onClick={onDelete}>Delete</button> */}
     </div>
     <div className='earthquake-body'>
-      <p><a href='{properties.url}'>Click for more info!</a></p>
+      <p><a href={properties.url}>Click for more info!</a></p>
     </div>
   </li>
 
