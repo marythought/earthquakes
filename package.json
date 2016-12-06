@@ -2,7 +2,7 @@
   "private": true,
   "name": "code-501-react-boilerplate",
   "version": "1.0.0",
-  "description": "Boilerplate for [Code 501: React + Redux](https://www.codefellows.org/courses/code-501/web-application-development-with-react-and-redux/)",
+  "description": "Earthquakes",
   "scripts": {
     "stats": "webpack --profile --json > stats.json",
     "start": "webpack-dev-server",
@@ -12,8 +12,8 @@
     "test:tdd": "npm run test -- --auto-watch --no-single-run"
   },
   "author": {
-    "name": "Mary Dickson",
-    "email": "mdickson@gmail.com",
+    "name": "Mary Dickson and Stephanie Lingwood",
+    "email": "mdickson@gmail.com and stephanielingwood@gmail.com",
     "url": "https://www.marydickson.com/"
   },
   "license": "MIT",

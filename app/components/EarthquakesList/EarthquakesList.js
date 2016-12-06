@@ -7,20 +7,22 @@ class EarthquakesList extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      earthquakeList: []
-      // token: ''
+      earthquakeList: [],
+      page: 0,
+      date: null,
+      selectedEarthquake: null
     }
   }
   getEarthquakes () {
-    let url = 'http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson'
-    // if (this.state.token !== '') {
-    //   url += `&pageToken=${this.state.token}`
-    // }
+    let url = 'http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&limit=10&minmagnitude=2.0'
+    if (this.state.page) {
+      url += `&offset=${this.state.page * 10}`
+    }
     axios.get(url)
       .then((res) => {
         this.setState({
           earthquakeList: res.data.features,
-          // token: res.data.pageToken,
+          page: this.state.page += 1,
           date: Date.now()
         })
       })
@@ -28,13 +30,16 @@ class EarthquakesList extends React.Component {
         console.error(res)
       })
     }
-  // deleteMessage (id) {
-  //   const oldMessages = this.state.earthquakeList
-  //   const newMessages = oldMessages.filter((o) => o.id !== id)
-  //   this.setState({
-  //     earthquakeList: newMessages
-  //   })
-  // }
+  mapEarthquake (id) {
+    const selectedEarthquake = _.find(this.state.earthquakeList,
+          (earthquake) => earthquake.id === id)
+    console.log(selectedEarthquake)
+    this.setState({
+      selectedEarthquake: _.find(this.state.earthquakeList,
+          (earthquake) => earthquake.id === id)
+    })
+    console.log(this.state.selectedEarthquake)
+  }
   componentDidMount () {
     this.getEarthquakes()
   }
@@ -44,24 +49,25 @@ class EarthquakesList extends React.Component {
       const sortedEarthquakes = this.state.earthquakeList
       return (
         <div className='EarthquakesList'>
-          {/* <button onClick={this.getEarthquakes.bind(this)}>Get More Earthquakes!</button> */}
+          { <button onClick={this.getEarthquakes.bind(this)}>Get More Earthquakes!</button> }
           <ul>
             {sortedEarthquakes.map((earthquake, i) =>
               <EarthquakeBox
                 key={i}
                 properties={earthquake.properties}
                 geometry={earthquake.geometry}
-                // onDelete={this.deleteMessage.bind(this, earthquake.id)}
+                mapEarthquake={this.mapEarthquake.bind(this, earthquake.id)}
               />
             )}
           </ul>
+          <p>{this.state.selectedEarthquake ? this.state.selectedEarthquake.properties.name : ''}</p>
         </div>
       )
     } else {
       return (
         <div className='EarthquakesList'>
           <h2>No earthquakes.</h2>
-          {/* <button onClick={this.getEarthquakes.bind(this)}>Get More Messages??</button> */}
+          { <button onClick={this.getEarthquakes.bind(this)}>Get More Messages??</button> }
         </div>
       )
     }
