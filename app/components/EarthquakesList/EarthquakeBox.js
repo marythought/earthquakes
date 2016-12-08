@@ -1,13 +1,14 @@
 import React from 'react'
 import format from 'date-fns/format'
 
-const EarthquakeBox = ({ properties, geometry, mapEarthquake }) =>
+const EarthquakeBox = ({ properties, geometry, mapEarthquake, sendToSlack }) =>
   <li className='EarthquakeBox'>
     <div className='earthquake-header'>
       {/* <img src={`https://earthquake-list.appspot.com/${author.photoUrl}`} alt={author.name} /> */}
       <h4>{properties.title}</h4>
       <p>{format(properties.time, 'D MMMM YYYY, h:mm a')}</p>
-      { <button onClick={mapEarthquake}>See on Map</button> }
+      <button onClick={mapEarthquake}>See on Map</button>
+      <button onClick={sendToSlack}>Send to Slack</button>
     </div>
     <div className='earthquake-body'>
       <p><a href={properties.url}>Click for more info!</a></p>
